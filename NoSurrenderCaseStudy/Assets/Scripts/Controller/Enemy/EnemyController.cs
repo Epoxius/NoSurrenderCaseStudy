@@ -12,7 +12,8 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-      //  GameManager.Instance.aiTargetList.Add(transform);
+        GameManager.Instance.aiTargetList.Add(transform);
+        GameManager.Instance.enemyList.Add(this);
     }
 
     public void Update()

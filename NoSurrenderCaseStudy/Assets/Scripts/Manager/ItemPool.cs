@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ItemPool : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class ItemPool : MonoBehaviour
     }
 
     [SerializeField] private Pool[] pools = null;
-    [SerializeField] private Transform poolParent;
+    
+    
     
 
     private void Awake()
@@ -25,7 +27,7 @@ public class ItemPool : MonoBehaviour
 
             for (int i = 0; i <  pools[j].poolSize; i++)
             {
-                ItemController obj = Instantiate( pools[j].objectPrefab, poolParent, true);
+                ItemController obj = Instantiate( pools[j].objectPrefab, transform, true);
                 obj.gameObject.SetActive(false);
 
                 pools[j].pooledObjects.Enqueue(obj);
@@ -47,5 +49,14 @@ public class ItemPool : MonoBehaviour
         pools[objectType].pooledObjects.Enqueue(obj);
 
         return obj;
+    }
+
+    public ItemController SetPooledObject(ItemController itemObj)
+    {
+        pools[0].pooledObjects.Enqueue(itemObj);
+        itemObj.transform.SetParent(transform);
+        itemObj.gameObject.SetActive(false);
+
+        return itemObj;
     }
 }

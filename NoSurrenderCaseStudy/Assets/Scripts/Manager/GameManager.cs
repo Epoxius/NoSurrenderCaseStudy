@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class GameManager : MonoBehaviour
 
    [Header("Lists")] 
    public List<Transform> aiTargetList;
+   public List<EnemyController> enemyList;
 
+  
    [Space] 
    
    [Header("Pool")]

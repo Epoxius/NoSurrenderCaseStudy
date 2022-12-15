@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   push: 2
   directionTransform: {fileID: 3718810870869939373}
+  selfCollider: {fileID: 3718810870436128599}
 --- !u!195 &3718810870436128680
 NavMeshAgent:
   m_ObjectHideFlags: 0
