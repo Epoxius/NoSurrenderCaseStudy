@@ -6,50 +6,49 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-   public NavMeshAgent ai;
+    public NavMeshAgent ai;
 
-   public Transform closestTarget;
+    public Transform closestTarget;
 
-   private void Start()
-   {
-      GameManager.Instance.aiTargetList.Add(transform);
-   }
+    private void Start()
+    {
+      //  GameManager.Instance.aiTargetList.Add(transform);
+    }
 
-   public void Update()
-   {
-      GetClosestEnemy();
-      AIMove();
-   }
+    public void Update()
+    {
+        RangeCalculate();
+        AIMove();
+    }
 
-   public Vector3 GetClosestEnemy()
-   {
-      float closestDistanceSqr = Mathf.Infinity;
-      Vector3 currentPosition = transform.position;
-      foreach (Transform potentialTarget in GameManager.Instance.aiTargetList)
-      {
-         Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
-         float dSqrToTarget = directionToTarget.sqrMagnitude;
-         if (dSqrToTarget < closestDistanceSqr)
-         {
-            closestDistanceSqr = dSqrToTarget;
+    public void RangeCalculate()
+    {
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (Transform potentialTarget in GameManager.Instance.aiTargetList)
+        {
+            Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr)
             {
-               closestDistanceSqr = dSqrToTarget;
-               closestTarget = potentialTarget;
+                if (dSqrToTarget > .5f)
+                {
+                    closestDistanceSqr = dSqrToTarget;
+                    closestTarget = potentialTarget;
+                }
             }
-         }
-        
-      }
+        }
+    }
 
-      return closestTarget.transform.position;
-   }
-   public void AIMove()
-   {
-      if (closestTarget == null)
-      {
-         Debug.Log("There Is No Enemy");
-         return;
-      }
-      ai.SetDestination(closestTarget.position);
-   }
+
+    public void AIMove()
+    {
+        if (closestTarget == null)
+        {
+            Debug.Log("There Is No Enemy");
+            return;
+        }
+        
+        ai.SetDestination(closestTarget.position);
+    }
 }

@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
    [Header("Lists")] 
    public List<Transform> aiTargetList;
 
+   [Space] 
+   
+   [Header("Pool")]
+   public ItemPool itemPool;
+
    public void Awake()
    {
       Instance = this;
