@@ -15,8 +15,8 @@ public class PushController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Push"))
         {
-            var pushedStrength = other.gameObject.GetComponent<PushController>();
-            transform.DOMove(transform.position -directionTransform.forward * pushedStrength.push, .5f);
+            var pushedStrength = other.gameObject.GetComponent<PushController>().push;
+            transform.DOMove(transform.position -directionTransform.forward * pushedStrength, .5f);
         }
 
         if (other.gameObject.CompareTag("Item"))
@@ -25,7 +25,7 @@ public class PushController : MonoBehaviour
             var particlePool = GameManager.Instance.particlePool;
          FxStateController particle =   particlePool.GetPooledObject(1);
          particle.transform.position = transformUp;
-            push += .3f;
+            push += .4f;
 
             if (transform.localScale.y <= maxScale)
             {

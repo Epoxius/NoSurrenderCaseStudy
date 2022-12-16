@@ -8,8 +8,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
-    public List<Material> materialList;
-    public Material selfMat;
+    
+  
     public Transform closestTarget;
     public bool isGrounded;
     public int enSpeed;
@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        MaterialChange();
+        
         GameManager.Instance.enemyList.Add(this);
         GameManager.Instance.gamePlayerList.Add(transform);
     }
@@ -29,14 +29,16 @@ public class EnemyController : MonoBehaviour
         {
             AIMove();
         }
+
+        if (GameManager.Instance.isFinish)
+        {
+            enSpeed = 0;
+            enRb.isKinematic = true;
+        }
+        
         
     }
 
-    public void MaterialChange()
-    {
-        var randomMat = Random.Range(0, materialList.Count);
-        selfMat = materialList[randomMat];
-    }
 
     public void RangeCalculate()
     {
@@ -101,6 +103,7 @@ public class EnemyController : MonoBehaviour
 
         if (other.gameObject.CompareTag("DeadZone"))
         {
+            GameManager.Instance.gamePlayerList.Remove(transform);
             var enemyPool = GameManager.Instance.enemyPool;
             var particlePool = GameManager.Instance.particlePool;
             FxStateController deathFx = particlePool.GetPooledObject(0);

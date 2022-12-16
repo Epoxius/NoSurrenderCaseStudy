@@ -17,9 +17,17 @@ public class PlayerMoveController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (isGrounded && GameManager.Instance.isStart && !GameManager.Instance.isFinish)
+        if (GameManager.Instance.isStart && !GameManager.Instance.isFinish)
         {
-            PlayerMove();
+            if (isGrounded)
+            {
+                PlayerMove();
+            }
+           
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
         }
         
         
@@ -65,7 +73,7 @@ public class PlayerMoveController : MonoBehaviour
             isGrounded = false;
             rb.useGravity = true;
             rb.constraints = RigidbodyConstraints.None;
-            rb.AddForce(Vector3.down*2);
+            rb.AddForce(Vector3.down*6);
            
 
             
