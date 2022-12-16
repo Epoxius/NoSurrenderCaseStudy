@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a055d27a319c3ce49996dbcb2d3a6bd5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,6 +145,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60eb2aafc230e9b45889dad725bc3ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialList:
+  - {fileID: 2100000, guid: f93ca07d4765c9f4d901f8d03c39fb9a, type: 2}
+  - {fileID: 2100000, guid: 43024745f65e3754ab7eb94ad719cc7f, type: 2}
+  - {fileID: 2100000, guid: a055d27a319c3ce49996dbcb2d3a6bd5, type: 2}
+  - {fileID: 2100000, guid: 3c047c3ab762e21429ad5b44e830a18c, type: 2}
+  - {fileID: 2100000, guid: 5a59e7ff554c8c847a437b6f30ca70de, type: 2}
+  - {fileID: 2100000, guid: 6359f7cbdbf887c4ab0070471222e2b7, type: 2}
+  selfMat: {fileID: 2100000, guid: a055d27a319c3ce49996dbcb2d3a6bd5, type: 2}
   closestTarget: {fileID: 0}
   isGrounded: 0
   enSpeed: 2

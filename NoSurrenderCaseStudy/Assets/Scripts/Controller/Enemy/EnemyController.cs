@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyController : MonoBehaviour
 {
+    public List<Material> materialList;
+    public Material selfMat;
     public Transform closestTarget;
     public bool isGrounded;
     public int enSpeed;
@@ -14,6 +17,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        MaterialChange();
         GameManager.Instance.enemyList.Add(this);
         GameManager.Instance.gamePlayerList.Add(transform);
     }
@@ -26,6 +30,12 @@ public class EnemyController : MonoBehaviour
             AIMove();
         }
         
+    }
+
+    public void MaterialChange()
+    {
+        var randomMat = Random.Range(0, materialList.Count);
+        selfMat = materialList[randomMat];
     }
 
     public void RangeCalculate()
