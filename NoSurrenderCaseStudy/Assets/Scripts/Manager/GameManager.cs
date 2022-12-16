@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -91,11 +92,13 @@ public class GameManager : MonoBehaviour
          isStart = false;
          isFinish = true;
          uiManager.nextLevelBtn.SetActive(true);
+         uiManager.nextLevelBtn.transform.DOScale(new Vector3(1.7f, 1.7f, 1.7f), .6f).SetEase(Ease.Linear);
       }
 
       if (gamePlayerList.Count == 1)
       {
          uiManager.nextLevelBtn.SetActive(true);
+         uiManager.nextLevelBtn.transform.DOScale(new Vector3(1.7f, 1.7f, 1.7f), .6f).SetEase(Ease.Linear);
          isStart = false;
          isFinish = true;
       }
