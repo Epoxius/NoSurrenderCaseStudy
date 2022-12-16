@@ -8,30 +8,24 @@ using Random = UnityEngine.Random;
 
 public class ItemController : MonoBehaviour
 {
+    public int itemRotateSpeed;
+    public SphereCollider selfCol;
+    public ParticleSystem spawnFx;
 
-     public int itemRotateSpeed;
 
-     private IEnumerator Start()
-     {
-        var randomTime = Random.Range(0, 6);
-         yield return new WaitForSeconds(randomTime);
-         ItemScale();
-     }
-
-     void Update()
+    private void Start()
     {
-       ItemRotate();
+       GameManager.Instance.aiTargetList.Add(transform);
+    }
+
+    void Update()
+    {
+       
+        ItemRotate();
     }
 
 
-     public void ItemScale()
-     {
-         transform.DOScale(Vector3.one, 1).OnComplete(() =>
-         {
-             GameManager.Instance.aiTargetList.Add(transform);
-         });
-     }
-
+ 
     public void ItemRotate()
     {
         transform.Rotate(Vector3.up * (Time.deltaTime * itemRotateSpeed));
@@ -43,9 +37,8 @@ public class ItemController : MonoBehaviour
         if (other.gameObject.CompareTag("Push"))
         {
             GameManager.Instance.aiTargetList.Remove(transform);
-            transform.localScale = Vector3.zero;
+
             itemPool.SetPooledObject(this);
-            
         }
     }
 }

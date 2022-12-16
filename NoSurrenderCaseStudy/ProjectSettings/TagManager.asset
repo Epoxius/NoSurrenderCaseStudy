@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Push
   - Item
+  - Missile
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,7 @@ public class PlayerMoveController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.aiTargetList.Add(transform);
+      //  GameManager.Instance.aiTargetList.Add(transform);
     }
 
     public void FixedUpdate()

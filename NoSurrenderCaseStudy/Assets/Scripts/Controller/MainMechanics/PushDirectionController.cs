@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PushDirectionController : MonoBehaviour
 {
-    public EnemyController selfEnemyController;
 
     private void Update()
     {
@@ -14,6 +13,7 @@ public class PushDirectionController : MonoBehaviour
 
     public void LookClosestEnemy()
     {
-        transform.LookAt(selfEnemyController.closestTarget);
+        var player = GameManager.Instance.playerMoveController;
+        transform.LookAt(player.transform.position);
     }
 }

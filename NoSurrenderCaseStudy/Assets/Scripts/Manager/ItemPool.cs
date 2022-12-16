@@ -39,13 +39,14 @@ public class ItemPool : MonoBehaviour
     {
         if (objectType >= pools.Length)
         {
+            Debug.Log("LAN");
             return null;
+            
         }
         
         ItemController obj =  pools[objectType].pooledObjects.Dequeue();
         
         obj.gameObject.SetActive(true);
-        
         pools[objectType].pooledObjects.Enqueue(obj);
 
         return obj;

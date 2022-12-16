@@ -14,20 +14,14 @@ public class PushController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Push"))
         {
-            if (selfCollider != null)
-            {
-                var pushedStrength = other.gameObject.GetComponent<PushController>();
-                transform.DOLocalMove(directionTransform.position + (-directionTransform.forward * pushedStrength.push), .5f);
-            }
-            
+            var pushedStrength = other.gameObject.GetComponent<PushController>();
+            transform.DOMove(transform.position -directionTransform.forward * pushedStrength.push, .5f);
         }
 
         if (other.gameObject.CompareTag("Item"))
         {
             push += .3f;
-            transform.DOScale(transform.localScale * 1.06f, .5f);
-            
+            transform.DOScale(transform.localScale * 1.08f, .5f);
         }
-        
     }
 }

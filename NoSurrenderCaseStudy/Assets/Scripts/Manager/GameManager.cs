@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
    
    [Header("Pool")]
    public ItemPool itemPool;
+   public EnemyPool enemyPool;
+
+   [Header("Scripts")] 
+   public PlayerMoveController playerMoveController;
 
    public void Awake()
    {
