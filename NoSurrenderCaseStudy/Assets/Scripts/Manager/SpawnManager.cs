@@ -12,20 +12,22 @@ public class SpawnManager : MonoBehaviour
     private double lastInterval;
     private int frames;
     private float fps;
-    
-    
+
+
     public void Start()
     {
-
         SpawnEnemy();
         lastInterval = Time.realtimeSinceStartup;
         frames = 0;
-
     }
 
     private void Update()
     {
-        ItemSpawnCheckRoutine();
+        if (GameManager.Instance.isStart && !GameManager.Instance.isFinish)
+        {
+            ItemSpawnCheckRoutine();
+        }
+       
     }
 
     public void ItemSpawnCheckRoutine()
@@ -46,7 +48,6 @@ public class SpawnManager : MonoBehaviour
                     ItemController item = itemPool.GetPooledObject(0);
                     item.transform.position = itemSpawnPosList[i].position;
                     item.transform.SetParent(itemSpawnPosList[i]);
-
                 }
             }
         }
@@ -60,6 +61,20 @@ public class SpawnManager : MonoBehaviour
             EnemyController enemy = enemyPool.GetPooledObject(0);
             enemy.transform.position = enemySpawnPosList[i].position;
             enemy.transform.SetParent(enemySpawnPosList[i]);
+        }
+    }
+
+    public void SpawnItemAtStart()
+    {
+        var itemPool = GameManager.Instance.itemPool;
+        for (int i = 0; i < itemSpawnPosList.Count; i++)
+        {
+            if (itemSpawnPosList[i].transform.childCount == 0)
+            {
+                ItemController item = itemPool.GetPooledObject(0);
+                item.transform.position = itemSpawnPosList[i].position;
+                item.transform.SetParent(itemSpawnPosList[i]);
+            }
         }
     }
 }

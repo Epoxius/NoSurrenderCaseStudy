@@ -15,6 +15,14 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (playerTransform != null)
+        {
+           CameraFollow();
+        }
+    }
+
+    public void CameraFollow()
+    {
         Vector3 newPos = Vector3.Lerp(transform.position, playerTransform.position + offset, lerpTime * Time.deltaTime);
         transform.position = newPos;
         transform.LookAt(playerTransform);

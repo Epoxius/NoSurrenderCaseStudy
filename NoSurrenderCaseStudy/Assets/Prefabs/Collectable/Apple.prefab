@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5357144516584605777}
   - component: {fileID: 8150652979309070951}
   - component: {fileID: 2734750208583560462}
+  - component: {fileID: 1770621099848318619}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Item
@@ -114,8 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemRotateSpeed: 90
-  selfCol: {fileID: 5357144516584605777}
-  spawnFx: {fileID: 4097777889159121367}
+  selfParticleController: {fileID: 1770621099848318619}
 --- !u!54 &2734750208583560462
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -132,6 +132,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1770621099848318619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5710676167854857139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350b59d71a69ed244bb40c7b08860d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnFx: {fileID: 4097777889159121367}
 --- !u!1 &5751152733013541543
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,19 +252,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5766803004509048624, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5766803740941828280, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5798622886981253924, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5960297545757265414, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960297545757265414, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960297545757265414, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960297545757265414, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5960297545757265414, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -296,6 +321,10 @@ PrefabInstance:
     - target: {fileID: 5961649676469434662, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
       propertyPath: m_Name
       value: RespawnExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961787949079542766, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 411e5bcfeb34fe54f9916a357003561d, type: 3}

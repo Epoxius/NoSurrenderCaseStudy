@@ -132,6 +132,7 @@ MonoBehaviour:
   push: 0.3
   directionTransform: {fileID: 3718810870869939373}
   selfCollider: {fileID: 3718810870436128599}
+  maxScale: 3
 --- !u!114 &3718810870436128683
 MonoBehaviour:
   m_ObjectHideFlags: 0

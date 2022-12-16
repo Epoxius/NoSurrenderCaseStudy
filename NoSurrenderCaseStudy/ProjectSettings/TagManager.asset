@@ -8,6 +8,7 @@ TagManager:
   - Item
   - Missile
   - Ground
+  - DeadZone
   layers:
   - Default
   - TransparentFX

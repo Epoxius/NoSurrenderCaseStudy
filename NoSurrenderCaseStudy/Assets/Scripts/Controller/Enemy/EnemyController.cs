@@ -11,16 +11,21 @@ public class EnemyController : MonoBehaviour
     public bool isGrounded;
     public int enSpeed;
     public Rigidbody enRb;
+
     private void Start()
     {
-       // GameManager.Instance.aiTargetList.Add(transform);
         GameManager.Instance.enemyList.Add(this);
+        GameManager.Instance.gamePlayerList.Add(transform);
     }
 
     public void Update()
     {
         RangeCalculate();
-        AIMove();
+        if (GameManager.Instance.isStart && !GameManager.Instance.isFinish)
+        {
+            AIMove();
+        }
+        
     }
 
     public void RangeCalculate()
@@ -68,13 +73,12 @@ public class EnemyController : MonoBehaviour
             // Smoothly rotate towards the target
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
         }
-    
-  
-            transform.position = Vector3.MoveTowards(transform.position, closestTarget.transform.position, enSpeed * Time.deltaTime);
-            
-        }
-        
-    
+
+
+        transform.position =
+            Vector3.MoveTowards(transform.position, closestTarget.transform.position, enSpeed * Time.deltaTime);
+    }
+
 
     public void OnTriggerEnter(Collider other)
     {
@@ -84,7 +88,15 @@ public class EnemyController : MonoBehaviour
             enRb.constraints = RigidbodyConstraints.FreezePositionY;
             enRb.useGravity = false;
         }
-      
+
+        if (other.gameObject.CompareTag("DeadZone"))
+        {
+            var enemyPool = GameManager.Instance.enemyPool;
+            var particlePool = GameManager.Instance.particlePool;
+            FxStateController deathFx = particlePool.GetPooledObject(0);
+            deathFx.transform.position = transform.position;
+                enemyPool.SetPooledObject(this);
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -94,7 +106,7 @@ public class EnemyController : MonoBehaviour
             isGrounded = false;
             enRb.useGravity = true;
             enRb.constraints = RigidbodyConstraints.None;
-            enRb.AddForce(-transform.forward* 5);
+            enRb.AddForce(-transform.forward * 5);
         }
     }
 }
