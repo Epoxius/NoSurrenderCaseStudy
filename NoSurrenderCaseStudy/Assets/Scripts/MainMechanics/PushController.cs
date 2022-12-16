@@ -10,18 +10,21 @@ public class PushController : MonoBehaviour
     public Transform directionTransform;
     public BoxCollider selfCollider;
     public int maxScale;
+    public Transform objectSpawnPos;
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Push"))
         {
             var pushedStrength = other.gameObject.GetComponent<PushController>().push;
-            transform.DOMove(transform.position -directionTransform.forward * pushedStrength, .5f);
+            transform.DOMove(transform.position +(-directionTransform.forward * pushedStrength), .5f);
+           
+            
         }
 
         if (other.gameObject.CompareTag("Item"))
         {
-            var transformUp = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
+            var transformUp = objectSpawnPos.position;
             var particlePool = GameManager.Instance.particlePool;
          FxStateController particle =   particlePool.GetPooledObject(1);
          particle.transform.position = transformUp;

@@ -35,8 +35,6 @@ public class EnemyController : MonoBehaviour
             enSpeed = 0;
             enRb.isKinematic = true;
         }
-        
-        
     }
 
 
@@ -86,9 +84,11 @@ public class EnemyController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
         }
 
+        var target = new Vector3(closestTarget.position.x,-0.6f, closestTarget.position.z);
 
         transform.position =
-            Vector3.MoveTowards(transform.position, closestTarget.transform.position, enSpeed * Time.deltaTime);
+            Vector3.MoveTowards(transform.position, target, enSpeed * Time.deltaTime);
+        
     }
 
 
@@ -119,7 +119,7 @@ public class EnemyController : MonoBehaviour
             isGrounded = false;
             enRb.useGravity = true;
             enRb.constraints = RigidbodyConstraints.None;
-            enRb.AddForce(-transform.forward * 5);
+            enRb.AddForce(-transform.forward * 20);
         }
     }
 }
