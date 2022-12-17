@@ -35,10 +35,12 @@ public class GameManager : MonoBehaviour
    public PlayerAnimationController playerAnimationController;
    public SpawnManager spawnManager;
    public UIManager uiManager;
+   public ScoreManager scoreManager;
 
    public void Awake()
    {
       Instance = this;
+      scoreManager.highScore = GameData.GetHighScore();
    }
 
    public void GameStart()
@@ -50,6 +52,25 @@ public class GameManager : MonoBehaviour
       spawnManager.SpawnItemAtStart();
       playerAnimationController.CheckPlayerMovement();
       isStart = true;
+      
+   }
+
+   public void GameEnd()
+   {
+      scoreManager.endGameScoreText.gameObject.SetActive(true);
+      scoreManager.endGameResultLineText.gameObject.SetActive(true);
+      scoreManager.highScoreText.gameObject.SetActive(true);
+      scoreManager.endGameScoreText.text = "Score : " + scoreManager.score;
+      scoreManager.endGameResultLineText.text = " You are :#" + gamePlayerList.Count;
+      GameData.SetHighScore(scoreManager.score);
+      if (scoreManager.score < scoreManager.highScore)
+      {
+         scoreManager.highScoreText.text = "High Score : " + scoreManager.highScore;
+      }
+      else
+      {
+         scoreManager.highScoreText.text = "High Score : " + scoreManager.score;
+      }
       
    }
 
@@ -88,19 +109,30 @@ public class GameManager : MonoBehaviour
 
       if (gameTime <= 0 )
       {
+         GameEnd();
        
          isStart = false;
          isFinish = true;
          uiManager.nextLevelBtn.SetActive(true);
-         uiManager.nextLevelBtn.transform.DOScale(new Vector3(1.7f, 1.7f, 1.7f), .6f).SetEase(Ease.Linear);
+         
       }
 
       if (gamePlayerList.Count == 1)
       {
+         GameEnd();
          uiManager.nextLevelBtn.SetActive(true);
-         uiManager.nextLevelBtn.transform.DOScale(new Vector3(1.7f, 1.7f, 1.7f), .6f).SetEase(Ease.Linear);
+        
          isStart = false;
          isFinish = true;
+      }
+
+      if (playerMoveController == null)
+      {
+         
+         isStart = false;
+         isFinish = true;
+         GameEnd();
+         uiManager.restartBtn.SetActive(true);
       }
    }
    

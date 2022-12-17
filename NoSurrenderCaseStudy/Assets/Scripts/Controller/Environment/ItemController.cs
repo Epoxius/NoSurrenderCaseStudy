@@ -13,7 +13,7 @@ public class ItemController : MonoBehaviour
 
     private void Start()
     {
-       GameManager.Instance.aiTargetList.Add(transform);
+       
        selfParticleController.SpawnFx();
     }
     
@@ -31,14 +31,17 @@ public class ItemController : MonoBehaviour
         transform.Rotate(Vector3.up * (Time.deltaTime * itemRotateSpeed));
     }
 
+    // When triggered Player SetPool this item.
     public void OnTriggerEnter(Collider other)
     {
+        
         var itemPool = GameManager.Instance.itemPool;
         if (other.gameObject.CompareTag("Push"))
         {
             GameManager.Instance.aiTargetList.Remove(transform);
 
             itemPool.SetPooledObject(this);
+            
         }
     }
 }

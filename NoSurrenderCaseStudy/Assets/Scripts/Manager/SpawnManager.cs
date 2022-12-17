@@ -47,6 +47,7 @@ public class SpawnManager : MonoBehaviour
                 {
                     ItemController item = itemPool.GetPooledObject(0);
                     item.transform.position = itemSpawnPosList[i].position;
+                    GameManager.Instance.aiTargetList.Add(item.transform);
                     item.transform.SetParent(itemSpawnPosList[i]);
                 }
             }
@@ -73,6 +74,7 @@ public class SpawnManager : MonoBehaviour
             {
                 ItemController item = itemPool.GetPooledObject(0);
                 item.transform.position = itemSpawnPosList[i].position;
+                GameManager.Instance.aiTargetList.Add(item.transform);
                 item.transform.SetParent(itemSpawnPosList[i]);
             }
         }

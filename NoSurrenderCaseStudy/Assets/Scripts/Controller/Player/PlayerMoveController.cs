@@ -34,6 +34,7 @@ public class PlayerMoveController : MonoBehaviour
         
     }
 
+    // Player move with Rigidbody
     public void PlayerMove()
     {
         Vector3 direction = Vector3.forward * dynamicJoystick.Vertical + Vector3.right * dynamicJoystick.Horizontal;
@@ -48,11 +49,14 @@ public class PlayerMoveController : MonoBehaviour
         }
     }
     
+    // Check player is On Ground and DeadZone and SetPool
     public void OnTriggerEnter(Collider other)
     {
+        var scoreManager = GameManager.Instance.scoreManager;
         if (other.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            rb.useGravity = true;
            
         }
 
@@ -64,6 +68,15 @@ public class PlayerMoveController : MonoBehaviour
             deathFx.transform.position = transform.position;
             Destroy(gameObject);
            
+        }
+
+        if (other.gameObject.CompareTag("Item"))
+        {
+            scoreManager.TextAnim();
+            scoreManager.score += scoreManager.scorePoint;
+            scoreManager.selfText.text = "+" + scoreManager.scorePoint;
+            scoreManager.scoreText.text =scoreManager.score.ToString();
+
         }
     }
 

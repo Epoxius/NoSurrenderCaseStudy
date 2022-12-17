@@ -10,11 +10,16 @@ public class EnemyController : MonoBehaviour
 {
     
   
-    public Transform closestTarget;
+   
     public bool isGrounded;
     public int enSpeed;
+    public int rotateSpeed;
     public Rigidbody enRb;
+    public Transform closestTarget;
+    public GameObject lastHitGameobject;
 
+    
+     // Adding enemy to Gamemanager lists.
     private void Start()
     {
         
@@ -22,12 +27,18 @@ public class EnemyController : MonoBehaviour
         GameManager.Instance.gamePlayerList.Add(transform);
     }
 
+    // Check game state for movement;
     public void Update()
     {
-        RangeCalculate();
+        
         if (GameManager.Instance.isStart && !GameManager.Instance.isFinish)
         {
-            AIMove();
+            if (isGrounded)
+            {
+                RangeCalculate();
+                AIMove();
+            }
+            
         }
 
         if (GameManager.Instance.isFinish)
@@ -38,6 +49,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
+    // Calculate range With aiTargetList
     public void RangeCalculate()
     {
         float closestDistanceSqr = Mathf.Infinity;
@@ -58,6 +70,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
+    // Move and Rotate with MoveTowards
     public void AIMove()
     {
         if (closestTarget == null)
@@ -81,7 +94,7 @@ public class EnemyController : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0, yRotation, 0);
 
             // Smoothly rotate towards the target
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
         }
 
         var target = new Vector3(closestTarget.position.x,-0.6f, closestTarget.position.z);
@@ -92,6 +105,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
+    // Check enemy is On Ground and DeadZone and SetPool
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Ground"))
@@ -103,6 +117,15 @@ public class EnemyController : MonoBehaviour
 
         if (other.gameObject.CompareTag("DeadZone"))
         {
+            if (lastHitGameobject != null)
+            {
+                var scoreManager = GameManager.Instance.scoreManager;
+                scoreManager.TextAnim();
+                scoreManager.score += scoreManager.killScorePoint;
+                scoreManager.selfText.text = "+" + scoreManager.killScorePoint;
+                scoreManager.scoreText.text = scoreManager.score.ToString();
+
+            }
             GameManager.Instance.gamePlayerList.Remove(transform);
             var enemyPool = GameManager.Instance.enemyPool;
             var particlePool = GameManager.Instance.particlePool;
@@ -110,12 +133,22 @@ public class EnemyController : MonoBehaviour
             deathFx.transform.position = transform.position;
                 enemyPool.SetPooledObject(this);
         }
+
+        if (other.gameObject.name =="Player")
+        {
+            lastHitGameobject = other.gameObject;
+        }
+        else
+        {
+            lastHitGameobject = null;
+        }
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
+            
             isGrounded = false;
             enRb.useGravity = true;
             enRb.constraints = RigidbodyConstraints.None;
