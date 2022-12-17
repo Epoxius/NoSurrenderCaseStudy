@@ -26,6 +26,7 @@ public class ScoreManager : MonoBehaviour
         selfText.transform.LookAt(selfText.transform.position + Camera.main.transform.forward);
     }
 
+    //  Text scale anim when item taken or enemy killed.
     public void TextAnim()
     {
         t.Kill();

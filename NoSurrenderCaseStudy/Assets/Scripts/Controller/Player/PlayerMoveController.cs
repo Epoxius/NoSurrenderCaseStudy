@@ -75,7 +75,7 @@ public class PlayerMoveController : MonoBehaviour
             scoreManager.TextAnim();
             scoreManager.score += scoreManager.scorePoint;
             scoreManager.selfText.text = "+" + scoreManager.scorePoint;
-            scoreManager.scoreText.text =scoreManager.score.ToString();
+            scoreManager.scoreText.text = "Score : " + scoreManager.score;
 
         }
     }

@@ -123,7 +123,7 @@ public class EnemyController : MonoBehaviour
                 scoreManager.TextAnim();
                 scoreManager.score += scoreManager.killScorePoint;
                 scoreManager.selfText.text = "+" + scoreManager.killScorePoint;
-                scoreManager.scoreText.text = scoreManager.score.ToString();
+                scoreManager.scoreText.text =  "Score : " + scoreManager.score;
 
             }
             GameManager.Instance.gamePlayerList.Remove(transform);
@@ -155,4 +155,6 @@ public class EnemyController : MonoBehaviour
             enRb.AddForce(-transform.forward * 20);
         }
     }
+
+    
 }

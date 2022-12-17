@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
          isStart = false;
          isFinish = true;
          uiManager.nextLevelBtn.SetActive(true);
+        
          
       }
 
@@ -133,7 +134,10 @@ public class GameManager : MonoBehaviour
          isFinish = true;
          GameEnd();
          uiManager.restartBtn.SetActive(true);
+         
       }
    }
+   
+   
    
 }

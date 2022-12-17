@@ -124,7 +124,6 @@ MonoBehaviour:
   backHitFx: {fileID: 4542782419695281553}
   objectSpawnPos: {fileID: 5463047356158259433}
   directionTransform: {fileID: 3718810870869939373}
-  selfScoreManager: {fileID: 0}
 --- !u!114 &877701303358902226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,11 +149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60eb2aafc230e9b45889dad725bc3ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closestTarget: {fileID: 0}
   isGrounded: 0
   enSpeed: 2
   rotateSpeed: 3
   enRb: {fileID: 3718810870436128598}
+  closestTarget: {fileID: 0}
+  lastHitGameobject: {fileID: 0}
 --- !u!136 &4767745240455712725
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -254,6 +254,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 562436546928461293}
     m_Modifications:
+    - target: {fileID: 3569274936375741907, guid: 2b93e13757923304aa964b37b2832b41, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3570096653832989033, guid: 2b93e13757923304aa964b37b2832b41, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3599848908356314265, guid: 2b93e13757923304aa964b37b2832b41, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3801146010690187003, guid: 2b93e13757923304aa964b37b2832b41, type: 3}
       propertyPath: m_RootOrder
       value: 5
