@@ -56,7 +56,7 @@ public class PlayerMoveController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            rb.useGravity = true;
+            rb.useGravity = false;
            
         }
 
